@@ -92,12 +92,6 @@
 
         </div>
 
-       <!-- {!! Form::open([
-                    'method' => 'DELETE',
-                    'route' => ['task.index', $task->id]
-                ]) !!}
-                    {!! Form::submit('Delete this task?', ['class' => 'btn btn-danger']) !!}
-                {!! Form::close() !!}-->
     </div>
     
     <div class="modal fade" id="myModal" role="dialog"  method="post">

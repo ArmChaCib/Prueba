@@ -31,9 +31,9 @@
       </div>
     </div>
 
-    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="_method" value="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    <button type="submit" name="name" value="post" class="btn btn-primary pull-right">Editar tarea</button>
+    <button type="submit" name="name" value="edit" class="btn btn-primary pull-right">Editar tarea</button>
   </form>
 
 </div>
