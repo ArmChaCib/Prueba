@@ -1,0 +1,164 @@
+.button
+{
+	background-color: blue;
+	color:white;
+	margin: 20px ; /*top  izquierda derecha abajo*/
+	border: 1px solid blue;
+	border-radius: 4px;
+}
+
+/*hover mouse sobre el componente*/
+.sombra:hover
+{
+	/*http://css3gen.com/box-shadow/*/
+	-webkit-box-shadow: 10px 6px 9px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    10px 6px 9px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         10px 6px 9px 0px rgba(50, 50, 50, 0.75);
+}
+
+.margin-top-10 { margin-top: 1em; }
+
+
+/*generador de botones http://blog.koalite.com/bbg/*/
+.btn-sample { 
+  color: #ffffff; 
+  background-color: #611BBD; 
+  border-color: #130269; 
+} 
+ 
+.btn-sample:hover, 
+.btn-sample:focus, 
+.btn-sample:active, 
+.btn-sample.active, 
+.open .dropdown-toggle.btn-sample { 
+  color: #ffffff; 
+  background-color: #49247A; 
+  border-color: #130269; 
+} 
+ 
+.btn-sample:active, 
+.btn-sample.active, 
+.open .dropdown-toggle.btn-sample { 
+  background-image: none; 
+} 
+ 
+.btn-sample.disabled, 
+.btn-sample[disabled], 
+fieldset[disabled] .btn-sample, 
+.btn-sample.disabled:hover, 
+.btn-sample[disabled]:hover, 
+fieldset[disabled] .btn-sample:hover, 
+.btn-sample.disabled:focus, 
+.btn-sample[disabled]:focus, 
+fieldset[disabled] .btn-sample:focus, 
+.btn-sample.disabled:active, 
+.btn-sample[disabled]:active, 
+fieldset[disabled] .btn-sample:active, 
+.btn-sample.disabled.active, 
+.btn-sample[disabled].active, 
+fieldset[disabled] .btn-sample.active { 
+  background-color: #611BBD; 
+  border-color: #130269; 
+} 
+ 
+.btn-sample .badge { 
+  color: #611BBD; 
+  background-color: #ffffff; 
+}
+
+.blue
+{
+	color: #00BFFF;
+	background-color:#ffffff;
+}
+
+.search
+{
+	margin-top: 8px;
+	border-radius: 20px;
+	background-color: #F5F8fA;
+}
+
+.search:focus,
+.search:active
+{
+
+	background-color: #FFF;
+}
+
+/*hacer clarito el placeholder*/
+
+::-webkit-input-placeholder {
+   color: #cbcbcb !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #cbcbcb !important;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #cbcbcb !important;  
+}
+
+:-ms-input-placeholder {  
+   color: #cbcbcb !important;  
+}
+
+.search-icon
+{
+	margin-top: 8px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.img-profile
+{
+	height: 35px;
+	width: 35px;
+	margin:8px;
+	border-radius: 4px;
+}
+
+.no-padding
+{
+	padding: 0px !important;
+}
+
+.m-top-8
+{
+	margin: 6px;
+}
+
+.navbar-default{
+    background-color: #fff;
+    border-color:#e7e7e7;
+}
+
+.posicion
+{
+	position:absolute;
+    left:250px;
+}
+
+.bg-green
+{
+	background-color: green;
+}
+
+.bg-blue
+{
+	background-color: blue;
+}
+
+.bg-red
+{
+	background-color: red;
+}
+
+.bg-pink
+{
+	background-color: pink;
+}
+
+textarea {
+   resize: none;
+}
