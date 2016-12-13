@@ -47,7 +47,6 @@
                  @foreach ($projects as $project)
                  <tr>
 
-
                    <td>{{ $project->id }}</td>
                    <td>{{$project->title}}</td>
                    <td>{{$project->description}}</td>
@@ -60,7 +59,7 @@
                          <ul class="dropdown-menu">
 
                          <li>
-                              <a href="/task/show/{{ $task->id }}">
+                              <a href="/projects/show/{{ $project->id }}">
                                   <i class="fa fa-eye"> </i>
                                   Ver
                               </a>
@@ -68,14 +67,14 @@
 
 
                            <li>
-                                <a href="/task/{{ $task->id }}/edit">
+                                <a href="/projects/{{ $project->id }}/edit">
                                     <i class="fa fa-edit"> </i>
                                     Editar
                                 </a>
                             </li>
 
                            <li>
-                                <a  data-toggle="modal" data-target="#myModal" v-on:click=setDelete({{$task->id}})>
+                                <a  data-toggle="modal" data-target="#myModal" v-on:click=setDelete({{$project->id}})>
                                     <i class="fa fa-trash"> </i>
                                     Eliminar
                                 </a>
@@ -114,7 +113,7 @@
           </div>
           
           <div class="modal-footer">
-            <form action="/task/delete/@{{idDelete}}" method="post">
+            <form action="/projects/delete/@{{idDelete}}" method="post">
             {{csrf_field()}}
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-danger" >Aceptar</button>

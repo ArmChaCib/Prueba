@@ -19,7 +19,7 @@
         <div class="col-xs-12   ">
             <h3>
                 Tareas
-                <a href="/task/create" type="button" class="btn btn-default pull-right">
+                <a href="/projects/task/create" type="button" class="btn btn-default pull-right">
                     <i class="fa  fa-plus"></i>
                     Agregar tarea
                 </a> 
@@ -39,6 +39,7 @@
                    <th>Descripción de tarea</th>
                    <th>Usuario</th>
                    <th>Acción</th>
+                   <th>Status</th>
                  </tr>
                </thead>
 
@@ -52,14 +53,14 @@
                    <td>{{$task->description}}</td>
                     <td>{{$task->user->name}}</td> 
 
-                   <td>
+                  <td>
                      <div class="dropdown">
                          <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown">Acción
                          <span class="caret"></span></button>
                          <ul class="dropdown-menu">
 
                          <li>
-                              <a href="/task/show/{{ $task->id }}">
+                              <a href="/projects/task/show/{{ $task->id }}">
                                   <i class="fa fa-eye"> </i>
                                   Ver
                               </a>
@@ -67,7 +68,7 @@
 
 
                            <li>
-                                <a href="/task/{{ $task->id }}/edit">
+                                <a href="/projects/task/{{ $task->id }}/edit">
                                     <i class="fa fa-edit"> </i>
                                     Editar
                                 </a>
@@ -85,7 +86,11 @@
 
                          </ul>
                        </div>  
-                   </td>
+                  </td>
+
+                  <td>
+                      {{ $task->status }}
+                  </td>
                   
                  </tr>
                  @endforeach
@@ -112,7 +117,7 @@
           </div>
           
           <div class="modal-footer">
-            <form action="/task/delete/@{{idDelete}}" method="post">
+            <form action="/projects/task/delete/@{{idDelete}}" method="post">
             {{csrf_field()}}
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-danger" >Aceptar</button>

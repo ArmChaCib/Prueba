@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-  <form class="" action="/task/{{$task->id}}/edit" method="post">
+  <form class="" action="/projects/task/{{$task->id}}/edit" method="post">
 
     <div class="form-group">
       <label>Nombre de la tarea</label>

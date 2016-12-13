@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-  <form class="" action="/task/create" method="post">
+  <form class="" action="/projects/task/create" method="post">
     <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
     <div class="form-group">
       <label>Nombre de la tarea</label>

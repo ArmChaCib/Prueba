@@ -17,7 +17,7 @@ class TaskController extends Controller
     public function index()
     {
        $tasks = Task::where('user_id',Auth::user()->id)->get();
-       return view('task.index',compact('tasks'));
+       return view('projects.task.index',compact('tasks'));
     }
 
     /**
@@ -27,7 +27,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('task.create');
+        return view('projects.task.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class TaskController extends Controller
     {
         
         Task::create($request->all());
-        return redirect('task')->with('message','Post has been inserted');
+        return redirect('projects/task')->with('message','Post has been inserted');
     }
 
     /**
@@ -53,7 +53,7 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
 
-        return view('task.detail')->with('task',$task);
+        return view('projects.task.detail')->with('task',$task);
     }
 
     /**
@@ -66,13 +66,13 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
                        
-                       // return to 404 page
-                       if(!$task){
-                         abort(404);
-                       }
-                       
-                       // display the article to single page
-                       return view('task.edit')->with('task',$task);
+       // return to 404 page
+       if(!$task){
+         abort(404);
+       }
+       
+       // display the article to single page
+       return view('projects.task.edit')->with('task',$task);
     }
 
     /**
@@ -90,7 +90,7 @@ class TaskController extends Controller
         $task->start=$request->start;
         $task->end=$request->end;
         $task->save();
-        return redirect('task')->with('message','Post has been updated');
+        return redirect('projects/task')->with('message','Post has been updated');
 
     }
 
@@ -104,6 +104,6 @@ class TaskController extends Controller
     {
        $task = Task::find($id);
        $task->delete();
-       return redirect('task')->with('message','data hasbeen deleted!');
+       return redirect('projects/task')->with('message','data hasbeen deleted!');
     }
 }

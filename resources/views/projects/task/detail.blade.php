@@ -27,7 +27,7 @@
     
 <div class="col-xs-12   ">
      <h3>
-         <a href="/task" type="button" class="btn btn-success pull-right">
+         <a href="/projects/task" type="button" class="btn btn-success pull-right">
              <i class="fa  fa-home"></i>
              Regresar
          </a> 
