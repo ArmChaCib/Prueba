@@ -3,21 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Task;
+use App\Project;
 use Illuminate\Support\Facades\Auth;
 
-
-class TaskController extends Controller
+class ProjectController extends Controller
 {
-    /**
+ /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-       $tasks = Task::where('user_id',Auth::user()->id)->get();
-       return view('task.index',compact('tasks'));
+       $projects = Project::where('user_id',Auth::user()->id)->get();
+       return view('projects.index',compact('projects'));
     }
 
     /**
@@ -27,7 +26,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('task.create');
+        return view('projects.createProject');
     }
 
     /**
@@ -38,9 +37,9 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        
-        Task::create($request->all());
-        return redirect('task')->with('message','Post has been inserted');
+
+        Project::create($request->all());
+        return redirect('projects')->with('message','Post has been inserted');
     }
 
     /**
@@ -51,9 +50,9 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        $task = Task::find($id);
+        $project = Project::find($id);
 
-        return view('task.detail')->with('task',$task);
+        return view('projects.detailProject')->with('project',$project);
     }
 
     /**
@@ -64,15 +63,11 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $task = Task::find($id);
+        $project = Project::find($id);
                        
-                       // return to 404 page
-                       if(!$task){
-                         abort(404);
-                       }
-                       
-                       // display the article to single page
-                       return view('task.edit')->with('task',$task);
+       
+       // display the article to single page
+       return view('projects.editProject')->with('project',$project);
     }
 
     /**
@@ -84,13 +79,13 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $task = Task::find($id);
-        $task->title = $request->title;
-        $task->description = $request->description;
-        $task->start=$request->start;
-        $task->end=$request->end;
-        $task->save();
-        return redirect('task')->with('message','Post has been updated');
+        $project = Project::find($id);
+        $project->title = $request->title;
+        $project->description = $request->description;
+        $project->start=$request->start;
+        $project->end=$request->end;
+        $project->save();
+        return redirect('project')->with('message','Post has been updated');
 
     }
 
@@ -102,8 +97,8 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-       $task = Task::find($id);
-       $task->delete();
-       return redirect('task')->with('message','data hasbeen deleted!');
+       $project = Project::find($id);
+       $project->delete();
+       return redirect('project')->with('message','data hasbeen deleted!');
     }
 }

@@ -12,9 +12,9 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="shortcut icon"  href="img/icono.png">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="shortcut icon"  href="/img/icono.png">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -64,31 +64,25 @@
         	      
         	      <ul class="nav navbar-nav navbar-right">
 
-        	        <li>
-        		        <div class="form-group has-feedback">
-        			            <input type="text" 
-        			            	class="form-control search" 
-        			            	placeholder="Busqueda..." 
-        			            >
-        		            <i class="fa fa-search search-icon form-control-feedback"></i>
-        		        </div>
-        	        </li>
+        	        
 
         	        <li>
-        	        	<a href="" class="no-padding">
-        	        		<img src="img/perfil.png" alt="" class="img-profile">
+        	        	<a href="" class="">
+        	        		<!-- <img src="img/perfil.png" alt="" class="img-profile"> -->
+                           Bienvenido: <b> {{Auth::user()->name}}</b>
         	        	</a>
         	        	
         	        </li>
 
         	        <li>
-        	        	<a href="" class="no-padding">
-        	        		<button class="btn btn-primary m-top-8">
-        	        			<i class="fa fa-pencil"></i>
-        	        			ToDocs
-        	        		</button>
-        	        	</a>
-        	        </li>
+                        <div class="form-group has-feedback">
+                                <input type="text" 
+                                    class="form-control search" 
+                                    placeholder="Busqueda..." 
+                                >
+                            <i class="fa fa-search search-icon form-control-feedback"></i>
+                        </div>
+                    </li>
         	        
         	      </ul>
         	    </div><!-- /.navbar-collapse -->

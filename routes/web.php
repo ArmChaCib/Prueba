@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,17 +13,35 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'WebController@index');
 
-/*
-Route::post('/agregarTarea','TaskController@store');
-Route::get('/listadoDeTareas','TaskController@index');
-Route::get('/agregarTarea','TaskController@create');
-*/
 
- Route::resource('task','TaskController');  
+//Rutas para el CRUD de tareas
+Route::group(['middleware' => 'auth'],function(){
+
+	Route::get('project/task','TaskController@index');
+	Route::get('project/task/create','TaskController@create');
+	Route::post('project/task/create','TaskController@store');
+	Route::get('project/task/show/{id}','TaskController@show');
+	Route::get('project/task/{id}/edit','TaskController@edit');
+	Route::post('project/task/{id}/edit','TaskController@update');
+	Route::post('project/task/delete/{id}','TaskController@destroy');
+});
+
+
+//Rutas para el CRUD de proyectos
+Route::group(['middleware' => 'auth'],function(){
+
+	Route::get('projects','ProjectController@index');
+	Route::get('projects/createProject','ProjectController@create');
+	Route::post('projects/createProject','ProjectController@store');
+	Route::get('projects/show/{id}','ProjectController@show');
+	Route::get('projects/{id}/edit','ProjectController@edit');
+	Route::post('projects/{id}/edit','ProjectController@update');
+	Route::post('projects/delete/{id}','ProjectController@destroy');
+});

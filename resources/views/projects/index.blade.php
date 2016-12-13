@@ -18,10 +18,10 @@
 
         <div class="col-xs-12   ">
             <h3>
-                Tareas
-                <a href="/task/create" type="button" class="btn btn-default pull-right">
+                Proyectos
+                <a href="/projects/createProject" type="button" class="btn btn-default pull-right">
                     <i class="fa  fa-plus"></i>
-                    Agregar tarea
+                    Agregar proyecto
                 </a> 
             </h3>    
         </div>
@@ -34,47 +34,50 @@
 
                <thead>
                  <tr>
-                   <th># de tarea</th>
-                   <th>Nombre de tarea</th>
-                   <th>Descripción de tarea</th>
+                   <th># de proyecto</th>
+                   <th>Nombre del proyecto</th>
+                   <th>Descripción del proyecto</th>
                    <th>Usuario</th>
                    <th>Acción</th>
+                   <th>Status</th>
                  </tr>
                </thead>
 
                <tbody>
-                 @foreach ($tasks as $task)
+                 @foreach ($projects as $project)
                  <tr>
 
-                 
 
-                   <td>{{ $task->id }}</td>
-                   <td>{{$task->title}}</td>
-                   <td>{{$task->description}}</td>
-                   <td>{{$task->user}}</td>
+                   <td>{{ $project->id }}</td>
+                   <td>{{$project->title}}</td>
+                   <td>{{$project->description}}</td>
+                    <td>{{$project->user->name}}</td> 
 
                    <td>
                      <div class="dropdown">
-                         <button class="btn btn-primary dropdown-toggle center-block" type="button" data-toggle="dropdown">Realizar acción
+                         <button class="btn btn-primary dropdown-toggle " type="button" data-toggle="dropdown">Acción
                          <span class="caret"></span></button>
                          <ul class="dropdown-menu">
 
                          <li>
-                              <a href="/task/{{ $task->id }}">
-                                  <i class="fa fa-eye"> Ver</i>
+                              <a href="/task/show/{{ $task->id }}">
+                                  <i class="fa fa-eye"> </i>
+                                  Ver
                               </a>
                           </li>
 
 
                            <li>
                                 <a href="/task/{{ $task->id }}/edit">
-                                    <i class="fa fa-edit"> Editar</i>
+                                    <i class="fa fa-edit"> </i>
+                                    Editar
                                 </a>
                             </li>
 
                            <li>
-                                <a  data-toggle="modal" data-target="#myModal">
-                                    <i class="fa fa-trash"> Eliminar</i>
+                                <a  data-toggle="modal" data-target="#myModal" v-on:click=setDelete({{$task->id}})>
+                                    <i class="fa fa-trash"> </i>
+                                    Eliminar
                                 </a>
                             </li>
 
@@ -84,6 +87,7 @@
                          </ul>
                        </div>  
                    </td>
+                   <td>{{$project->status}}</td>
                   
                  </tr>
                  @endforeach
@@ -110,9 +114,11 @@
           </div>
           
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
-            
+            <form action="/task/delete/@{{idDelete}}" method="post">
+            {{csrf_field()}}
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-danger" >Aceptar</button>
+            </form>
           </div>
           
         </div>
@@ -120,4 +126,19 @@
     </div>
 
 </div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.27/vue.js"></script>
+<script>
+        new Vue({
+          el: '#app',
+          data: {
+            idDelete: ''
+          },
+          methods: {
+            setDelete:function(id){
+              this.idDelete=id;
+            }
+          }
+        });
+</script>
 @endsection

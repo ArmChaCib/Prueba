@@ -6,5 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    protected $table = 'prueba';
+    protected $table = 'task';
+
+    protected $fillable=
+    [
+    	'title','description','start','end','user_id',
+    ];
+
+    public function user()
+    {
+    	return $this->beLongsTo('App\User');
+    }
+
+    public function project()
+    {
+    	return $this->beLongsTo('App\Project');
+    }
 }
