@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Project;
+use App\Task;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
@@ -97,7 +98,9 @@ class ProjectController extends Controller
     public function destroy($id)
     {
        $project = Project::find($id);
+       Task::where('project_id',$id)->delete();
        $project->delete();
        return redirect('projects')->with('message','data hasbeen deleted!');
     }
 }
+

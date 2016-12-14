@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Task;
+use App\Comments;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -17,7 +18,8 @@ class TaskController extends Controller
     public function index($idProject)
     {
        $tasks = Task::where('user_id',Auth::user()->id)->where('project_id',$idProject)->get();
-       return view('projects.task.index',compact('tasks'),compact('idProject'));
+       $comments = Comments::where('project_id',$idProject)->get();
+       return view('projects.task.index')->with(compact('tasks'))->with(compact('idProject'))->with(compact('comments'));
     }
 
     /**
@@ -101,10 +103,10 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$idProject)
     {
        $task = Task::find($id);
        $task->delete();
-       return redirect('projects/task')->with('message','data hasbeen deleted!');
+       return redirect('projects/show/{{$idProject}}/tasks',compact('tasks'),compact('idProject'));
     }
 }

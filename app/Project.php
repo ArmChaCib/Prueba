@@ -21,4 +21,8 @@ class Project extends Model
     public function user(){
         return $this->beLongsTo('App\User');
     }
+
+    public function comments(){
+        return $this->hasMany('App\Comments');
+    }
 }

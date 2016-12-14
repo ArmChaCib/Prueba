@@ -45,3 +45,12 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::post('projects/{id}/edit','ProjectController@update');
 	Route::post('projects/delete/{id}','ProjectController@destroy');
 });
+
+
+ //Rutas para los comentarios
+ Route::group(['middleware' => 'auth'],function(){
+
+// 	Route::get('projects/show/{id}/tasks','CommentController@index');
+//	Route::get('projects/show/{id}/tasks','CommentController@create');
+ 	Route::post('projects/show/{id}/tasks','CommentController@store');
+ });

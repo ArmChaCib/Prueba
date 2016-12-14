@@ -22,4 +22,8 @@ class Task extends Model
     {
     	return $this->beLongsTo('App\Project');
     }
+
+    public function comments(){
+        return $this->hasMany('App\Comments');
+    }
 }

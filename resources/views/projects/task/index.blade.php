@@ -46,14 +46,15 @@
                </thead>
 
                <tbody>
+                 {{$puedeComentar = false}}
                  @foreach ($tasks as $task)
                  <tr>
 
-
-                   <td>{{ $task->id }}</td>
-                   <td>{{$task->title}}</td>
-                   <td>{{$task->description}}</td>
-                    <td>{{$task->user->name}}</td> 
+                  <td>{{ $task->id }}</td>
+                  <td>{{$task->title}}</td>
+                  <td>{{$task->description}}</td>  
+                  <td>{{$task->user->name}}</td> 
+                  {{$puedeComentar = true}}
 
                   <td>
                      <div class="dropdown">
@@ -83,9 +84,6 @@
                                 </a>
                             </li>
 
-                            
-
-
                          </ul>
                        </div>  
                   </td>
@@ -105,8 +103,8 @@
 
         </div>
 
-    <div class="row">
-    <div class="col-xs-12   ">
+  <div class="row">
+    <div class="col-xs-12 ">
         <h3>
             <a href="/projects" type="button" class="btn btn-success pull-right">
                <i class="fa  fa-home"></i>
@@ -114,9 +112,60 @@
             </a> 
         </h3>    
     </div> 
+  </div>
 
+  <div class="container">
+
+    @foreach ($comments as $comment)
+
+      <div class="row">
+        <div class="col-xs-12">
+          <b>Creado por: </b>{{$comment->user->name}}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          {{$comment->created_at}}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          {{$comment->comment}}
+        </div>
+      </div>
+      <br>
+      <br>
+    @endforeach
+
+  </div> 
+
+
+
+  <div class="container">
+    @if ($puedeComentar)
+      <form class="" action="/projects/show/{{$idProject}}/tasks" method="post">
+        <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
+        <input type="hidden" value="{{$idProject}}" name="project_id">
+        <div class="form-group">
+          <label>Comentario</label>
+          <textarea  class="form-control" name="comment" rows="3" placeholder="Comentario"></textarea>
+          {{ ($errors->has('comment')) ? $errors->first('comment') : '' }} <br>
+        </div>
+
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <button type="submit" name="name" value="post" class="btn btn-primary pull-right">Comentar</button>
+        
+      </form>
+    @else
+      <div class="col-xs-12"> Solo usuarios involucrados en alguna de estas tareas puede comentar</div>
+    @endif
   </div>
     
+
+
+
     <div class="modal fade" id="myModal" role="dialog"  method="post">
 
       <div class="modal-dialog modal-sm">
@@ -133,7 +182,7 @@
           </div>
           
           <div class="modal-footer">
-            <form action="/projects/task/delete/@{{idDelete}}" method="post">
+            <form action="/projects/show/{{$idProject}}/tasks/delete/@{{idDelete}}" method="post">
             {{csrf_field()}}
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-danger" >Aceptar</button>
