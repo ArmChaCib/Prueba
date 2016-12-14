@@ -69,13 +69,14 @@
                               </a>
                           </li>
 
-
-                           <li>
-                                <a href="/projects/show/{{$idProject}}/tasks/{{ $task->id }}/edit">
-                                    <i class="fa fa-edit"> </i>
-                                    Editar
-                                </a>
+                          @if ($task->user->name == Auth::user()->name)
+                            <li>
+                              <a href="/projects/show/{{$idProject}}/tasks/{{ $task->id }}/edit">
+                                <i class="fa fa-edit"> </i>
+                                Editar
+                              </a>
                             </li>
+                          
 
                            <li>
                                 <a  data-toggle="modal" data-target="#myModal" v-on:click=setDelete({{$task->id}})>
@@ -83,16 +84,25 @@
                                     Eliminar
                                 </a>
                             </li>
-
+                          @endif
                          </ul>
                        </div>  
                   </td>
-
+                  
                   <td>
                     @if ($task->status)
                       Tarea terminada
+
                     @else
-                      <button class="btn btn-danger" type="submit"> Finalizar tarea</button>
+                      @if ($task->user->name == Auth::user()->name)
+                        <button  data-toggle="modal" data-target="#finishModal" v-on:click=setDelete({{$task->id}})>
+                            <i class="fa fa-flag-checkered"> </i>
+                              Finalizar tarea
+                        </button>
+                      @else
+                        Tarea no finalizada
+                      @endif
+
                     @endif
                   </td>
                   
@@ -166,32 +176,60 @@
 
 
 
-    <div class="modal fade" id="myModal" role="dialog"  method="post">
+  <div class="modal fade" id="myModal" role="dialog"  method="post">
 
-      <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-sm">
 
-        <div class="modal-content">
+      <div class="modal-content">
 
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Eliminar</h4>
-          </div>
-
-          <div class="modal-body">
-            <p>¿Seguro que deseas eliminar la tarea?</p>
-          </div>
-          
-          <div class="modal-footer">
-            <form action="/projects/show/{{$idProject}}/tasks/delete/@{{idDelete}}" method="post">
-            {{csrf_field()}}
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-danger" >Aceptar</button>
-            </form>
-          </div>
-          
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Eliminar</h4>
         </div>
+
+        <div class="modal-body">
+          <p>¿Seguro que deseas eliminar la tarea?</p>
+        </div>
+        
+        <div class="modal-footer">
+          <form action="/projects/show/{{$idProject}}/tasks/delete/@{{idDelete}}" method="post">
+          {{csrf_field()}}
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-danger" >Aceptar</button>
+          </form>
+        </div>
+        
       </div>
     </div>
+  </div>
+
+
+  <div class="modal fade" id="finishModal" role="dialog"  method="post">
+
+    <div class="modal-dialog modal-sm">
+
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Finalizar</h4>
+        </div>
+
+        <div class="modal-body">
+          <p>¿Seguro que deseas finalizar la tarea?</p>
+        </div>
+        
+        <div class="modal-footer">
+          <form action="/projects/show/{{$idProject}}/tasks/finished/@{{idDelete}}" method="post">
+          {{csrf_field()}}
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-danger" >Aceptar</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div
 
 </div>
 

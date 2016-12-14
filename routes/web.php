@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::get('projects/show/{id}/tasks/show/{idTask}','TaskController@show');
 	Route::get('projects/show/{id}/tasks/{idTask}/edit','TaskController@edit');
 	Route::post('projects/show/{id}/tasks/{idTask}/edit','TaskController@update');
+	Route::post('projects/show/{id}/tasks/finished/{idTask}','TaskController@taskFinished');
 	Route::post('projects/show/{id}/tasks/delete/{idTask}','TaskController@destroy');
 });
 

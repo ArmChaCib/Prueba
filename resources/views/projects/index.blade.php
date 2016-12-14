@@ -64,21 +64,23 @@
                               </a>
                           </li>
 
-
-                           <li>
-                                <a href="/projects/{{ $project->id }}/edit">
-                                    <i class="fa fa-edit"> </i>
-                                    Editar
-                                </a>
+                          @if ($project->user->name == Auth::user()->name)
+                            <li>
+                              <a href="/projects/{{ $project->id }}/edit">
+                                <i class="fa fa-edit"> </i>
+                                Editar
+                              </a>
                             </li>
-                              @if ($project->user->name == Auth::user()->name)
-                                <li>
-                                  <a  data-toggle="modal" data-target="#myModal" v-on:click=setDelete({{$project->id}})>
-                                      <i class="fa fa-trash"> </i>
-                                      Eliminar
-                                  </a>
-                                </li>
-                              @endif
+                          @endif
+
+                          @if ($project->user->name == Auth::user()->name)
+                            <li>
+                              <a  data-toggle="modal" data-target="#myModal" v-on:click=setDelete({{$project->id}})>
+                                  <i class="fa fa-trash"> </i>
+                                  Eliminar
+                              </a>
+                            </li>
+                          @endif
                                 
                               
                            

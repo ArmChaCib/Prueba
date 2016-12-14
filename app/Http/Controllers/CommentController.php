@@ -35,8 +35,8 @@ class CommentController extends Controller
     public function store(Request $request,$idProject)
     {
         
-        Comments::create($request->all());
-        return redirect('projects/show/{{$idProject}}/tasks',compact('tasks'),compact('idProject'));
+         Comments::create($request->all());
+         return redirect('projects/show/'.$idProject.'/tasks');
     }
 
     /**

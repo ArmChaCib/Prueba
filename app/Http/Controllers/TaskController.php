@@ -17,7 +17,7 @@ class TaskController extends Controller
      */
     public function index($idProject)
     {
-       $tasks = Task::where('user_id',Auth::user()->id)->where('project_id',$idProject)->get();
+       $tasks = Task::where('project_id',$idProject)->get();
        $comments = Comments::where('project_id',$idProject)->get();
        return view('projects.task.index')->with(compact('tasks'))->with(compact('idProject'))->with(compact('comments'));
     }
@@ -43,7 +43,8 @@ class TaskController extends Controller
     {
         
         Task::create($request->all());
-        return redirect('projects/show/{{$idProject}}/tasks',compact('tasks'),compact('idProject'));
+        return redirect('projects/show/'.$idProject.'/tasks');
+        // return redirect('projects/show/{{$idProject}}/tasks',compact('tasks'),compact('idProject'));
     }
 
     /**
@@ -65,9 +66,9 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($idProject,$id)
+    public function edit($idProject,$idTask)
     {
-        $task = Task::find($id);
+        $task = Task::find($idTask);
                        
        // return to 404 page
        if(!$task){
@@ -85,15 +86,25 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id,$idProject)
+    public function update(Request $request, $idProject,$idTask)
     {
-        $task = Task::find($id);
+        $task = Task::find($idTask);
         $task->title = $request->title;
         $task->description = $request->description;
         $task->start=$request->start;
         $task->end=$request->end;
         $task->save();
-        return redirect('projects/task',compact('task'),compact('idProject'));
+        return redirect('projects/show/'.$idProject.'/tasks');
+
+    }
+
+
+    public function taskFinished(Request $request, $idProject,$idTask)
+    {
+        $task = Task::find($idTask);
+        $task->status = true;
+        $task->save();
+        return redirect('projects/show/'.$idProject.'/tasks');
 
     }
 
@@ -103,10 +114,10 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id,$idProject)
+    public function destroy($idProject,$idTask)
     {
-       $task = Task::find($id);
+       $task = Task::find($idTask);
        $task->delete();
-       return redirect('projects/show/{{$idProject}}/tasks',compact('tasks'),compact('idProject'));
+       return redirect('projects/show/'.$idProject.'/tasks');
     }
 }
