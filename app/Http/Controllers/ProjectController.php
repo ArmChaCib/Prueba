@@ -51,7 +51,6 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::find($id);
-
         return view('projects.detailProject')->with('project',$project);
     }
 
@@ -85,7 +84,7 @@ class ProjectController extends Controller
         $project->start=$request->start;
         $project->end=$request->end;
         $project->save();
-        return redirect('project')->with('message','Post has been updated');
+        return redirect('projects')->with('message','Post has been updated');
 
     }
 
@@ -99,6 +98,6 @@ class ProjectController extends Controller
     {
        $project = Project::find($id);
        $project->delete();
-       return redirect('project')->with('message','data hasbeen deleted!');
+       return redirect('projects')->with('message','data hasbeen deleted!');
     }
 }

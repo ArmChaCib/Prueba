@@ -24,13 +24,13 @@ Route::get('/home', 'WebController@index');
 //Rutas para el CRUD de tareas
 Route::group(['middleware' => 'auth'],function(){
 
-	Route::get('projects/task','TaskController@index');
-	Route::get('projects/task/create','TaskController@create');
-	Route::post('projects/task/create','TaskController@store');
-	Route::get('projects/task/show/{id}','TaskController@show');
-	Route::get('projects/task/{id}/edit','TaskController@edit');
-	Route::post('projects/task/{id}/edit','TaskController@update');
-	Route::post('projects/task/delete/{id}','TaskController@destroy');
+	Route::get('projects/show/{id}/tasks','TaskController@index');
+	Route::get('projects/show/{id}/tasks/create','TaskController@create');
+	Route::post('projects/show/{id}/tasks/create','TaskController@store');
+	Route::get('projects/show/{id}/tasks/show/{idTask}','TaskController@show');
+	Route::get('projects/show/{id}/tasks/{idTask}/edit','TaskController@edit');
+	Route::post('projects/show/{id}/tasks/{idTask}/edit','TaskController@update');
+	Route::post('projects/show/{id}/tasks/delete/{idTask}','TaskController@destroy');
 });
 
 

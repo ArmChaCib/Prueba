@@ -10,7 +10,7 @@ class Project extends Model
 
     protected $fillable=
     [
-    	'title','description','start','end','task_id',
+    	'title','description','start','end','user_id','project_id',
     ];
 
 

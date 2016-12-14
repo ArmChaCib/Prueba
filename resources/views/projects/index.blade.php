@@ -39,7 +39,6 @@
                    <th>Descripción del proyecto</th>
                    <th>Usuario</th>
                    <th>Acción</th>
-                   <th>Status</th>
                  </tr>
                </thead>
 
@@ -50,7 +49,7 @@
                    <td>{{ $project->id }}</td>
                    <td>{{$project->title}}</td>
                    <td>{{$project->description}}</td>
-                    <td>{{$project->user->name}}</td> 
+                   <td>{{$project->user->name}}</td> 
 
                    <td>
                      <div class="dropdown">
@@ -72,21 +71,20 @@
                                     Editar
                                 </a>
                             </li>
-
-                           <li>
-                                <a  data-toggle="modal" data-target="#myModal" v-on:click=setDelete({{$project->id}})>
-                                    <i class="fa fa-trash"> </i>
-                                    Eliminar
-                                </a>
-                            </li>
-
-                            
-
-
+                              @if ($project->user->name == Auth::user()->name)
+                                <li>
+                                  <a  data-toggle="modal" data-target="#myModal" v-on:click=setDelete({{$project->id}})>
+                                      <i class="fa fa-trash"> </i>
+                                      Eliminar
+                                  </a>
+                                </li>
+                              @endif
+                                
+                              
+                           
                          </ul>
                        </div>  
                    </td>
-                   <td>{{$project->status}}</td>
                   
                  </tr>
                  @endforeach

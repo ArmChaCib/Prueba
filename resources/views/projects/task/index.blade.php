@@ -12,21 +12,23 @@
         @endif
         
         @yield('content')
-    </div>
+  </div>
 
-    <div class="row">
+  <div class="row">
 
-        <div class="col-xs-12   ">
-            <h3>
-                Tareas
-                <a href="/projects/task/create" type="button" class="btn btn-default pull-right">
-                    <i class="fa  fa-plus"></i>
-                    Agregar tarea
-                </a> 
-            </h3>    
-        </div>
+    <div class="col-xs-12   ">
+        <h3>
+            Tareas
+            <a href="/projects/show/{{$idProject}}/tasks/create" type="button" class="btn btn-default pull-right">
+                <i class="fa  fa-plus"></i>
+                Agregar tarea
+            </a> 
+        </h3>  
+    </div>  
 
+  </div>
 
+  <div class="row">
         
         <div class="col-xs-12 margin-top-10">
 
@@ -60,7 +62,7 @@
                          <ul class="dropdown-menu">
 
                          <li>
-                              <a href="/projects/task/show/{{ $task->id }}">
+                              <a href="/projects/show/{{$idProject}}/tasks/show/{{$task->id}}">
                                   <i class="fa fa-eye"> </i>
                                   Ver
                               </a>
@@ -68,7 +70,7 @@
 
 
                            <li>
-                                <a href="/projects/task/{{ $task->id }}/edit">
+                                <a href="/projects/show/{{$idProject}}/tasks/{{ $task->id }}/edit">
                                     <i class="fa fa-edit"> </i>
                                     Editar
                                 </a>
@@ -89,7 +91,11 @@
                   </td>
 
                   <td>
-                      {{ $task->status }}
+                    @if ($task->status)
+                      Tarea terminada
+                    @else
+                      <button class="btn btn-danger" type="submit"> Finalizar tarea</button>
+                    @endif
                   </td>
                   
                  </tr>
@@ -99,7 +105,17 @@
 
         </div>
 
-    </div>
+    <div class="row">
+    <div class="col-xs-12   ">
+        <h3>
+            <a href="/projects" type="button" class="btn btn-success pull-right">
+               <i class="fa  fa-home"></i>
+               Regresar
+            </a> 
+        </h3>    
+    </div> 
+
+  </div>
     
     <div class="modal fade" id="myModal" role="dialog"  method="post">
 

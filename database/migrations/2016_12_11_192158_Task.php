@@ -20,6 +20,7 @@ class Task extends Migration
             $table->date('start');
             $table->date('end');
             $table->integer('user_id');
+            $table->integer('project_id');
             $table->timestamps();
             $table->boolean('status')->default(0);
         });

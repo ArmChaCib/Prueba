@@ -14,10 +14,10 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idProject)
     {
-       $tasks = Task::where('user_id',Auth::user()->id)->get();
-       return view('projects.task.index',compact('tasks'));
+       $tasks = Task::where('user_id',Auth::user()->id)->where('project_id',$idProject)->get();
+       return view('projects.task.index',compact('tasks'),compact('idProject'));
     }
 
     /**
@@ -25,9 +25,10 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($idProject)
     {
-        return view('projects.task.create');
+
+        return view('projects.task.create',compact('idProject'));
     }
 
     /**
@@ -36,11 +37,11 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$idProject)
     {
         
         Task::create($request->all());
-        return redirect('projects/task')->with('message','Post has been inserted');
+        return redirect('projects/show/{{$idProject}}/tasks',compact('tasks'),compact('idProject'));
     }
 
     /**
@@ -49,11 +50,11 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idProject,$id)
     {
         $task = Task::find($id);
 
-        return view('projects.task.detail')->with('task',$task);
+        return view('projects.task.detail',compact('task'),compact('idProject'));
     }
 
     /**
@@ -62,7 +63,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($idProject,$id)
     {
         $task = Task::find($id);
                        
@@ -72,7 +73,7 @@ class TaskController extends Controller
        }
        
        // display the article to single page
-       return view('projects.task.edit')->with('task',$task);
+       return view('projects.task.edit',compact('task'),compact('idProject'));
     }
 
     /**
@@ -82,7 +83,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id,$idProject)
     {
         $task = Task::find($id);
         $task->title = $request->title;
@@ -90,7 +91,7 @@ class TaskController extends Controller
         $task->start=$request->start;
         $task->end=$request->end;
         $task->save();
-        return redirect('projects/task')->with('message','Post has been updated');
+        return redirect('projects/task',compact('task'),compact('idProject'));
 
     }
 

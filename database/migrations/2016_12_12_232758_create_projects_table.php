@@ -20,9 +20,7 @@ class CreateProjectsTable extends Migration
             $table->date('start');
             $table->date('end');
             $table->integer('user_id');
-            $table->integer('task_id');
             $table->timestamps();
-            $table->boolean('status')->default(0);
         });
     }
 
