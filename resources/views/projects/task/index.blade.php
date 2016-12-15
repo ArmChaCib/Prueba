@@ -133,10 +133,10 @@
           <b>Creado por: </b>{{$comment->user->name}}
         </div>
       </div>
-
+      
       <div class="row">
         <div class="col-xs-12">
-          {{$comment->created_at}}
+          <b>Creado el: </b>{{$comment->created_at}}
         </div>
       </div>
 

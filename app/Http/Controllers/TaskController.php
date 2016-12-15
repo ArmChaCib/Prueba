@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\StoreTask;
 use Illuminate\Http\Request;
 use App\Task;
 use App\Comments;
@@ -39,7 +39,7 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$idProject)
+    public function store(StoreTask $request,$idProject)
     {
         
         Task::create($request->all());
@@ -86,7 +86,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $idProject,$idTask)
+    public function update(StoreTask $request, $idProject,$idTask)
     {
         $task = Task::find($idTask);
         $task->title = $request->title;

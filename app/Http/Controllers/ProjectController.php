@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\StoreProject;
 
 use Illuminate\Http\Request;
 use App\Project;
 use App\Task;
+use App\Comments;
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
@@ -36,7 +38,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProject $request)
     {
 
         Project::create($request->all());
@@ -51,8 +53,9 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
+        $tasks = Task::where('project_id',$id)->get();
         $project = Project::find($id);
-        return view('projects.detailProject')->with('project',$project);
+        return view('projects.detailProject',compact('project','tasks'));
     }
 
     /**
@@ -77,7 +80,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreProject $request, $id)
     {
         $project = Project::find($id);
         $project->title = $request->title;
@@ -99,6 +102,7 @@ class ProjectController extends Controller
     {
        $project = Project::find($id);
        Task::where('project_id',$id)->delete();
+       Comments::where('project_id',$id)->delete();
        $project->delete();
        return redirect('projects')->with('message','data hasbeen deleted!');
     }
